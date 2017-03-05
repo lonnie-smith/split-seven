@@ -1,12 +1,12 @@
 extends ../layouts/base.pug
 
 block content
-    section.grid
+    section.grid.wrapper
         div.grid-col.grid-col_8of12.grid-col_offset2of12
             div!= data.setList.text
 
     each set in data.setList.sets
-        section.grid
+        section.grid.wrapper
             div.grid-col.grid-col_6of12
                 img.fitParent(src=mkImgUrl('c_fit,q_auto:best,w_1200', set.coverImg))
             div.grid-col.grid-col_6of12
