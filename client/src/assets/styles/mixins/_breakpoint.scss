@@ -1,0 +1,20 @@
+@mixin breakpoint($size, $max-width: false) {
+  @if not breakpoint-check($breakpoint-map, $size) {
+    @error("#{$size} is not a valid breakpoint");
+  }
+
+  @if type-of($size) == 'string' {
+    $size: map-get($breakpoint-map, $size);
+  }
+
+  @if $max-width {
+    @media (max-width: $size - 1px) {
+      @content;
+    }
+  }
+  @else {
+    @media (min-width: $size) {
+      @content;
+    }
+  }
+}

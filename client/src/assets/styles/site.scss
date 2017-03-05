@@ -1,7 +1,9 @@
 // MIXINS
 @import 'mixins/clearfix';
+@import 'mixins/breakpoint';
 
 // BASE
+@import 'base/vars';
 @import 'base/reset';
 @import 'base/typography';
 
