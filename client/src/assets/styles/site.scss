@@ -6,8 +6,9 @@
 @import 'base/typography';
 
 // LAYOUT
-@import 'layout/grid';
 @import 'layout/wrapper';
+@import 'layout/grid';
+@import 'layout/blocks';
 
 // CONTENT
 @import 'content/jumbotron';

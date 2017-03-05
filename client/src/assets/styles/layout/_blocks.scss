@@ -1,0 +1,24 @@
+.blocks {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    align-content: flex-start;
+    flex-wrap: wrap;
+}
+
+.blocks.blocks_center {
+    justify-content: center;
+}
+
+.blocks-block {
+    padding: 1rem;
+    flex-shrink: 0;
+    box-sizing: border-box;
+}
+
+@for $i from 1 through 4 {
+    .blocks-block_#{$i}up {
+        width: (1 / $i * 100%);
+    }
+}
