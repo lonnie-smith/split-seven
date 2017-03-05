@@ -23,11 +23,18 @@
     }
 }
 
-
 @include breakpoint('phone-lg', $max-width: true) {
     @for $i from 1 through 3 {
-    .blocks-block_#{$i + 1}up {
-        width: (1 / $i * 100%);
+        .blocks-block_#{$i + 1}up {
+            width: (1 / $i * 100%);
+        }
     }
 }
+
+@include breakpoint('tablet', $max-width: true) {
+    @for $i from 1 through 3 {
+        .blocks-block_tabletCollapse.blocks-block_#{$i + 1}up {
+            width: (1 / $i * 100%);
+        }
+    }
 }
