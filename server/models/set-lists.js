@@ -20,7 +20,6 @@ SetList.add({
     published: {
         note: 'Check the box to make this Set List live on the site.',
         type: Types.Boolean,
-        required: true,
         'default': false,
     },
     sets: {
