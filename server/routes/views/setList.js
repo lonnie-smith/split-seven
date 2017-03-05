@@ -1,4 +1,5 @@
 const keystone = require('keystone');
+const _ = require('lodash');
 
 module.exports = (req, res) => {
     const view = new keystone.View(req, res);
@@ -19,8 +20,12 @@ module.exports = (req, res) => {
             });
 
         query.exec().then(setList => {
-            debugger;
-            locals.data.setList = setList;
+            const sortList = setList;
+            sortList.sets = _.sortBy(setList.sets, s => { return s.sequence; });
+            for (const set of sortList.sets) {
+                set.tracks = _.sortBy(set.tracks, t => { return t.sequence; });
+            }
+            locals.data.setList = sortList;
             locals.title = `SPLIT SEVEN // ${setList.title.toUpperCase()}`;
             next();
         })
@@ -31,3 +36,4 @@ module.exports = (req, res) => {
 
     view.render('set-list');
 };
+
