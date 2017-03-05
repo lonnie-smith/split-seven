@@ -1,0 +1,28 @@
+include ../mixins/flash-messages.pug
+
+doctype html
+html
+    head
+        meta(charset="utf-8")
+        meta(name="viewport", content="initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width")
+
+        title= title || 'Split Seven'
+        link(rel="shortcut icon", href="/favicon.ico", type="image/x-icon")
+        link(href="/assets/styles/site.css", rel="stylesheet")
+
+        block css
+
+        block head
+
+    body
+
+        block intro
+
+        //- +flash-messages(messages)
+
+        block content
+
+        block js
+            script(src="/assets/scripts/vendor.js")
+            script(src="/assets/scripts/main.js")
+

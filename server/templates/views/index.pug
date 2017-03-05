@@ -1,0 +1,12 @@
+extends ../layouts/base.pug
+
+block content
+    header
+        h1 Split Seven
+
+    section
+        each setList, idx in data.setLists
+            ul
+                li
+                    a(href=`/set-list/${setList.slug}`)
+                        img(src=mkImgUrl('c_fit,q_auto:best,w_400', setList.coverImg))
