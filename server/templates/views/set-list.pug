@@ -7,22 +7,26 @@ block content
 
     each set in data.setList.sets
         section.wrapper.blocks
-            div.blocks-block.blocks-block_tabletCollapse.blocks-block_2up
+            div.blocks-block.blocks-block_2thirds
                 img.fitParent(src=mkImgUrl('c_fit,q_auto:best,w_1200', set.coverImg))
-            div.blocks-block.blocks-block_tabletCollapse.blocks-block_2up
+            div.blocks-block.blocks-block_1third
                 div!= set.text
                 ul
                     each track in set.tracks
-                        li(data-audio-file= JSON.stringify({
+                        li.audioTrack(data-audio-file= JSON.stringify({
                             sequence: track.sequence,
                             artist: track.artist,
                             title: track.title,
                         }))
-                            img(src=mkImgUrl('c_fit,q_auto:best,w_100', track.img))
-                            span= `${track.artist} — ${track.title}`
+
+                            img.audioTrack-img(
+                                src=mkImgUrl('c_fit,q_auto:best,w_100', track.img))
+                            div.audioTrack-info
+                                div.audioTrack-title= track.title
+                                div.audioTrack-artist= track.artist
                             audio(
-                                controls
                                 preload="metadata"
                                 src=track.getUrl())
-                div
-                    a(href="#") download
+
+    section.wrapper
+        a(href="#") download

@@ -1,0 +1,63 @@
+.audioTrack {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: no-wrap;
+    padding: 0.5rem;
+    cursor: pointer;
+    transition: 200ms ease;
+    background-color: #ffffff;
+    color: #606060;
+    z-index: 1;
+    > * + * {
+        padding-left: 1rem;
+    }
+
+    &.playing, &.paused {
+        background-color: #f0f0f0;
+        color: #000;
+        & .audioTrack-info {
+            margin-left: 2rem;
+            &:before {
+                font-family: 'fontello';
+                display: block;
+                text-align: center;
+                font-size: 1.5rem;
+                position: absolute;
+                width: 3rem;
+                left: -2rem;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+        }
+    }
+    &.playing .audioTrack-info:before {
+        content: '\e803';
+    }
+    &.paused .audioTrack-info:before {
+        content: '\e804';
+    }
+}
+
+.audioTrack-info {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.audioTrack-img {
+    width: 6rem;
+    height: 6rem;
+    flex-shrink: 0;
+}
+
+.audioTrack-title {
+    font-weight: 700;
+    font-size: 1.2rem;
+    margin-bottom: 0.25em;
+}
+
+.audioTrack-artist {
+    // color: #606060;
+}

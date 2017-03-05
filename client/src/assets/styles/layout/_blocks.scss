@@ -23,6 +23,14 @@
     }
 }
 
+.blocks-block_1third {
+    width: 33%;
+}
+
+.blocks-block_2thirds {
+    width: 66%;
+}
+
 @include breakpoint('phone-lg', $max-width: true) {
     @for $i from 1 through 3 {
         .blocks-block_#{$i + 1}up {
@@ -36,5 +44,13 @@
         .blocks-block_tabletCollapse.blocks-block_#{$i + 1}up {
             width: (1 / $i * 100%);
         }
+    }
+
+    .blocks-block_1third {
+        width: 100%;
+    }
+
+    .blocks-block_2thirds {
+        width: 100%;
     }
 }

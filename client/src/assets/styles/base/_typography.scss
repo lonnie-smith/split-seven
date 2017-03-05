@@ -3,9 +3,15 @@ html, body {
     font-size: 18px;
 }
 
+@include breakpoint('phone-lg', $max-width: true) {
+    html, body {
+        font-size: 16px;
+    }
+}
+
 p {
     line-height: 1.4;
-    margin-bottom: 2em;
+    margin-bottom: 1.4em;
 }
 
 .txt_light {
@@ -14,4 +20,8 @@ p {
 
 .txt_lg {
     font-size: 1.2rem;
+}
+
+.txt_sm {
+    font-size: 0.8rem;
 }
