@@ -18,7 +18,6 @@ block content
                         each track in set.tracks
                             li(data-audio-file= JSON.stringify(track.audioFile))
                                 img(src=mkImgUrl('c_fit,q_auto:best,w_100', track.img))
-                                - console.log(`/${track.audioFile.path}${track.audioFile.filename}`)
                                 span= `${track.artist} — ${track.title}`
                                 audio(
                                     controls

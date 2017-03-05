@@ -7,7 +7,6 @@ const keystone = require('keystone');
     Include anything that should be initialised before route controllers are executed.
 */
 module.exports.initLocals = (req, res, next) => {
-    console.log('----', req.url)
     const locals = res.locals;
     locals.user = req.user;
     locals.mkImgUrl = mkCldUrl;
