@@ -1,8 +1,8 @@
 extends ../layouts/base.pug
 
 block content
-    section.wrapper.grid
-        div.grid-col.grid-col_6of12.grid-col_offset3of12
+    section.wrapper.blocks.blocks_center
+        div.blocks-block.blocks-block_2up
             a(href=`/set-list/${data.setLists[0].slug}`)
                 img.fitParent(src=mkImgUrl('c_fit,q_auto:best,w_700', data.setLists[0].coverImg))
 
