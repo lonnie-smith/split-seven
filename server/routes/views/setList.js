@@ -19,6 +19,7 @@ module.exports = (req, res) => {
             });
 
         query.exec().then(setList => {
+            debugger;
             locals.data.setList = setList;
             locals.title = `SPLIT SEVEN // ${setList.title.toUpperCase()}`;
             next();
