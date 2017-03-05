@@ -39,6 +39,15 @@ keystone.init({
     'cookie secret': process.env.COOKIE_SECRET,
 
     'wysiwyg cloudinary images': true,
+
+    // these two options prevent tinymce from inserting
+    // shitbrained inline styles when you paste content from some
+    // other source.
+    'wysiwyg additional plugins': 'paste',
+    'wysiwyg additional options': {
+        paste_as_text: true,
+    },
+
     'cloudinary folders': true,
     'cloudinary config': process.env.CLOUDINARY_URL,
     'cloudinary secure': true,
