@@ -24,8 +24,11 @@ block content
                             div.audioTrack-info
                                 div.audioTrack-title= track.title
                                 div.audioTrack-artist= track.artist
+                                div.audioTrack-progress
+                                    div.audioTrack-progress-bar
+                                    div.audioTrack-progress-current
+                                    div.audioTrack-progress-duration
                             audio(
-                                preload="metadata"
                                 src=track.getUrl())
 
     section.wrapper

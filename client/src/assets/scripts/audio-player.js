@@ -13,6 +13,10 @@ class Track {
         this.trackSeq = trackSeq;
         this.$el = $el;
         this.$el.click(() => { this.toggle(); });
+        this.$progressBar = $el.find('.audioTrack-progress-bar');
+        this.$duration = $el.find('.audioTrack-progress-duration');
+        this.$currentTime = $el.find('.audioTrack-progress-current');
+        this.updateTrackPos();
     }
 
     toggle() {
@@ -29,6 +33,7 @@ class Track {
         this.$el.removeClass('paused');
         this.playing = true;
         this.paused = false;
+        this.ticker = setInterval(() => { this.updateTrackPos(); }, 250);
     }
 
     pause() {
@@ -37,6 +42,7 @@ class Track {
         this.$el.addClass('paused');
         this.playing = false;
         this.paused = true;
+        clearInterval(this.ticker);
     }
 
     stop() {
@@ -45,6 +51,25 @@ class Track {
         this.$el.removeClass('playing paused');
         this.playing = false;
         this.paused = false;
+    }
+
+    updateTrackPos() {
+        const time = this.audio.currentTime;
+        const dur = this.audio.duration;
+        const pct = (time / dur) * 100;
+        const mins = Math.floor(time / 60);
+        let secs = Math.round(time) % 60;
+        if (secs < 10) {
+            secs = `0${secs}`;
+        }
+        if (!this._durationSet) {
+            const dmins = Math.floor(dur / 60);
+            let dsecs = Math.round(dur) % 60;
+            if (dsecs < 10) { dsecs = `0${dsecs}`; }
+            this.$duration.text(`${dmins}:${dsecs}`);
+        }
+        this.$currentTime.text(`${mins}:${secs}`);
+        this.$progressBar.css('width', `${pct}%`);
     }
 }
 

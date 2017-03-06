@@ -16,6 +16,10 @@
     &.playing, &.paused {
         background-color: #f0f0f0;
         color: #000;
+        & .audioTrack-progress {
+            opacity: 1;
+            display: block;
+        }
         & .audioTrack-info {
             margin-left: 2rem;
             &:before {
@@ -44,6 +48,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    flex-grow: 1;
 }
 
 .audioTrack-img {
@@ -60,4 +65,39 @@
 
 .audioTrack-artist {
     // color: #606060;
+}
+
+.audioTrack-progress {
+    height: 5px;
+    width: calc(100% - 1rem);
+    margin-top: 1.5rem;
+    background-color: #cccccc;
+    opacity: 0;
+    display: none;
+    position: relative;
+}
+
+.audioTrack-progress-bar {
+    position: absolute;
+    height: 100%;
+    width: 0;
+    top: 0;
+    left: 0;
+    background-color: #000;
+    transition: width 250ms ease;
+}
+
+.audioTrack-progress-current, .audioTrack-progress-duration {
+    position: absolute;
+    top: 10px;
+    color: #999999;
+    font-size: 0.66rem;
+}
+
+.audioTrack-progress-current {
+    left: 0;
+}
+
+.audioTrack-progress-duration {
+    right: 0;
 }
