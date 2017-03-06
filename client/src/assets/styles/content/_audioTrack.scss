@@ -55,6 +55,9 @@
     width: 6rem;
     height: 6rem;
     flex-shrink: 0;
+    position: relative;
+    align-self: center;
+
 }
 
 .audioTrack-title {
@@ -71,6 +74,7 @@
     height: 5px;
     width: calc(100% - 1rem);
     margin-top: 1.5rem;
+    margin-bottom: 1rem;
     background-color: #cccccc;
     opacity: 0;
     display: none;
@@ -100,4 +104,13 @@
 
 .audioTrack-progress-duration {
     right: 0;
+}
+
+@include breakpoint('phone-lg', $max-width: true) {
+    .audioTrack-title {
+        font-size: 1rem;
+    }
+    .audioTrack-artist {
+        font-size: 0.8rem;
+    }
 }

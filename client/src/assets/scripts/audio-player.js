@@ -63,10 +63,13 @@ class Track {
             secs = `0${secs}`;
         }
         if (!this._durationSet) {
-            const dmins = Math.floor(dur / 60);
-            let dsecs = Math.round(dur) % 60;
-            if (dsecs < 10) { dsecs = `0${dsecs}`; }
-            this.$duration.text(`${dmins}:${dsecs}`);
+            if (!isNaN(dur)) {
+                const dmins = Math.floor(dur / 60);
+                let dsecs = Math.round(dur) % 60;
+                if (dsecs < 10) { dsecs = `0${dsecs}`; }
+                this.$duration.text(`${dmins}:${dsecs}`);
+                this._durationSet = true;
+            }
         }
         this.$currentTime.text(`${mins}:${secs}`);
         this.$progressBar.css('width', `${pct}%`);
