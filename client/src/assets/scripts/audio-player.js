@@ -83,7 +83,9 @@ class TrackList {
             return new Track(
                 $(el).data('audioFile'), $(el), this, idx);
         });
-        this.tracks[0].pause();
+        if (this.tracks.length > 0) {
+            this.tracks[0].pause();
+        }
     }
 
     playTrack(trackSeq) {
