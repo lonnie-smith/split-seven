@@ -1,9 +1,6 @@
 .audioTrack {
     position: relative;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: no-wrap;
-    padding: 0.5rem;
+    margin-bottom: 2rem;
     cursor: pointer;
     transition: 200ms ease;
     background-color: #ffffff;
@@ -14,41 +11,58 @@
     }
 
     &.playing, &.paused {
-        background-color: #f0f0f0;
         color: #000;
+        & .audioTrack-seq {
+            color: #000000;
+        }
         & .audioTrack-progress {
             opacity: 1;
             display: block;
         }
-        & .audioTrack-info {
-            margin-left: 2rem;
+        & .audioTrack-title {
             &:before {
                 font-family: 'fontello';
-                display: block;
-                text-align: center;
-                font-size: 1.5rem;
-                position: absolute;
-                width: 3rem;
-                left: -2rem;
-                top: 50%;
-                transform: translateY(-50%);
+                text-align: left;
+                margin-right: 0.5em;
+                color: #808080;
+                width: 1em;
+                position: relative;
+                top: 0.2em;
             }
         }
     }
-    &.playing .audioTrack-info:before {
+    &.playing .audioTrack-title:before {
         content: '\e803';
     }
-    &.paused .audioTrack-info:before {
+    &.paused .audioTrack-title:before {
         content: '\e804';
     }
 }
 
 .audioTrack-info {
-    position: relative;
+}
+
+.audioTrack-info-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     flex-grow: 1;
+    position: relative;
+}
+
+.audioTrack-seq {
+    position: absolute;
+    height: 100%;
+    width: 2rem;
+    left: 0;
+    top: 0;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #aaa;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .audioTrack-img {
@@ -64,17 +78,27 @@
     font-weight: 700;
     font-size: 1.2rem;
     margin-bottom: 0.25em;
+    margin-left: 3rem;
+    &:before {
+        display: inline-block;
+        content: '';
+        width: 0;
+        overflow: hidden;
+        color: transparent;
+        transition: color 300ms ease, width 300ms ease;
+    }
 }
 
 .audioTrack-artist {
-    // color: #606060;
+    margin-left: 3rem;
 }
 
 .audioTrack-progress {
     height: 5px;
-    width: calc(100% - 1rem);
-    margin-top: 1.5rem;
+    width: calc(100% - 3.5rem);
+    margin-top: 0.66rem;
     margin-bottom: 1rem;
+    margin-left: 3rem;
     background-color: #cccccc;
     opacity: 0;
     display: none;

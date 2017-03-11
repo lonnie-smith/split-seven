@@ -18,6 +18,10 @@
 }
 
 @include breakpoint('phone-lg', $max-width: true) {
+    .jumbotron {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
     .jumbotron-hd {
         font-size: 30vw;
     }

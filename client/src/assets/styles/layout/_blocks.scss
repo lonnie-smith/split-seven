@@ -15,6 +15,9 @@
     padding: 1rem;
     flex-shrink: 0;
     box-sizing: border-box;
+    &.blocks-block_flushLeft {
+        padding-left: 0;
+    }
 }
 
 @for $i from 1 through 4 {
@@ -44,6 +47,10 @@
         .blocks-block_tabletCollapse.blocks-block_#{$i + 1}up {
             width: (1 / $i * 100%);
         }
+    }
+
+    .blocks-block.blocks-block_flushLeft {
+        padding-left: 1rem;
     }
 
     .blocks-block_1third {

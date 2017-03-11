@@ -1,19 +1,14 @@
 extends ../layouts/base.pug
 
 block content
-    section.wrapper.blocks.blocks_center
-        div.blocks-block.blocks-block_2up
-            div.txt_light.txt_lg!= data.setList.text
-
     each set in data.setList.sets
         section.wrapper.blocks
             div.blocks-block.blocks-block_2thirds
                 div.fitParent.slideShow(data-set-img-target-id=set._id)
                     img.slideShow-img(
                         src=mkImgUrl('c_fit,q_auto:best,w_1200', set.coverImg))
-            div.blocks-block.blocks-block_1third
-                div!= set.text
-                ul
+            div.blocks-block.blocks-block_1third.blocks-block_flushLeft
+                ul.audioTrackList
                     each track in set.tracks
                         li.audioTrack(data-audio-file= JSON.stringify({
                             sequence: track.sequence,
@@ -24,8 +19,10 @@ block content
                             setId: set._id,
                         }))
                             div.audioTrack-info
-                                div.audioTrack-title= track.title
-                                div.audioTrack-artist= track.artist
+                                div.audioTrack-info-container
+                                    div.audioTrack-seq= track.sequence
+                                    div.audioTrack-title= track.title
+                                    div.audioTrack-artist= track.artist
                                 div.audioTrack-progress
                                     div.audioTrack-progress-bar
                                     div.audioTrack-progress-current
