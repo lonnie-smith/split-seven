@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 // pushes variables found in ./env into process.env
 require('dotenv').config({ path: '.env' });
 
@@ -18,6 +20,8 @@ keystone.init({
     name: 'Split Seven',
     brand: 'Split Seven', // how are name & brand different?
     // favicon: 'public/assets/media/images/icon/favicon.ico',
+
+    'session store': 'mongo',
 
     // static files
     'static': ['../public', '../data'],
