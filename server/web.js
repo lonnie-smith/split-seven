@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 // pushes variables found in ./env into process.env
 require('dotenv').config({ path: '.env' });
 
