@@ -112,7 +112,6 @@ class SlideShow {
     constructor($el) {
         this.$el = $el;
         this.setId = $el.data('setImgTargetId');
-        console.debug($el.get(0), this.setId)
         this.ownImg = $el.find('img');
         this.otherImgs = [];
     }
@@ -127,12 +126,6 @@ class SlideShow {
                 $(i).addClass('slideShow-img_fadeOut');
             }
         }
-        // if (img != null && !found) {
-            // this.otherImgs.push(img);
-            // this.$el.append(img);
-            // $(img).removeClass('slideShow-img_fadeOut');
-            // this.ownImg.addClass('slideShow-img_fadeOut');
-        // }
         if (found) {
             this.ownImg.addClass('slideShow-img_fadeOut');
         }
@@ -171,7 +164,12 @@ class TrackList {
     }
 
     playTrack(trackSeq) {
-        if (trackSeq < 0 || trackSeq >= this.tracks.length) {
+        if (trackSeq < 0) { return; }
+        if (trackSeq >= this.tracks.length) {
+            for (const show of this.slideShows) {
+                show.setImg(null);
+            }
+            this.tracks[this.tracks.length - 1].stop();
             return;
         }
         const thisTrack = this.tracks[trackSeq];
@@ -192,8 +190,6 @@ class TrackList {
             }
         }
     }
-
-
 
     queueTrack(trackSeq) {
         if (trackSeq < 0 || trackSeq >= this.tracks.length) {
