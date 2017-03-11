@@ -27,5 +27,9 @@ block content
                                     div.audioTrack-progress-bar
                                     div.audioTrack-progress-current
                                     div.audioTrack-progress-duration
+    if data.setList.download
+        section.wrapper.blocks
+            div.blocks-block.blocks-block_1up
+                a.downloadLink(href= data.setList.download)= data.setList.downloadText
 
 

@@ -16,7 +16,6 @@ SetList.add({
     date: { type: Types.Date, initial: true, required: true },
     title: { type: Types.Text, initial: true, required: true },
     coverImg: { label: 'Set List Image', type: Types.CloudinaryImage },
-    text: { type: Types.Html, wysiwyg: true, height: 400 },
     published: {
         note: 'Check the box to make this Set List live on the site.',
         type: Types.Boolean,
@@ -28,8 +27,15 @@ SetList.add({
         refPath: 'setList',
         many: true,
     },
+    download: {
+        note: 'Paste URL for .zip download here',
+        type: Types.Url,
+    },
+    downloadText: {
+        note: 'What should the download link say?',
+        type: Types.Text,
+        'default': 'download',
+    }
 });
-
-// SetList.relationship({ path: 'sets', ref: 'Set', refPath: 'setList' });
 
 SetList.register();

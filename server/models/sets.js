@@ -17,7 +17,6 @@ Set.add({
     sequence: { type: Types.Number, initial: true, required: true },
     title: { type: Types.Text, initial: true, required: true },
     coverImg: { label: 'Cover Image', type: Types.CloudinaryImage },
-    text: { type: Types.Html, wysiwyg: true, height: 400 },
     tracks: {
         type: Types.Relationship,
         ref: 'Track',
@@ -26,7 +25,6 @@ Set.add({
     },
 });
 
-// Set.relationship({ path: 'tracks', ref: 'Track', refPath: 'trackset' });
 Set.relationship({ path: 'setList', ref: 'SetList', refPath: 'set' });
 
 Set.register();

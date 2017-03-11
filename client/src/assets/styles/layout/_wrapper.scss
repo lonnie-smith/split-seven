@@ -1,20 +1,20 @@
 .wrapper {
     max-width: 1440px;
     margin: 0 auto;
-}
-
-.wrapper + .wrapper {
-    margin-top: 4rem;
+    margin-bottom: 4rem;
 }
 
 @include breakpoint('tablet', $max-width: true) {
-    .wrapper + .wrapper {
-        margin-top: 2rem;
+    .wrapper {
+        margin-bottom: 2rem;
     }
 }
 
 @include breakpoint('phone-lg', $max-width: true) {
-    .wrapper + .wrapper {
-        margin-top: 0;
+    .wrapper {
+        margin-bottom: 0;
+        &:last-child {
+            margin-bottom: 2rem;
+        }
     }
 }
