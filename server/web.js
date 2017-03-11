@@ -21,6 +21,8 @@ keystone.init({
     brand: 'Split Seven', // how are name & brand different?
     // favicon: 'public/assets/media/images/icon/favicon.ico',
 
+    'session store': 'mongo',
+
     // static files
     'static': ['../public', '../data'],
 
