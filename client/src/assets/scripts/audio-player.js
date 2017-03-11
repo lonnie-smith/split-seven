@@ -2,21 +2,34 @@ const $ = require('jquery');
 
 class Track {
     constructor(trackData, $el, parent, trackSeq) {
-        // { sequence, artist, title }
+        // { sequence, artist, title, url, trackImgUrl, setId }
         Object.assign(this, trackData);
-        this.audio = $el.find('audio').get(0);
+
+        this.audio = document.createElement('audio');
+        $el.append(this.audio);
         this.$img = $el.find('img').first();
+        this.parent = parent;
+        this.trackSeq = trackSeq;
         this.audio.addEventListener('ended', evt => {
             parent.playTrack(trackSeq + 1);
         });
-        this.parent = parent;
-        this.trackSeq = trackSeq;
         this.$el = $el;
         this.$el.click(() => { this.toggle(); });
+        this.$progress = $el.find('.audioTrack-progress');
+        this.$progress.click(e => { this.handleMouseSeek(e); });
         this.$progressBar = $el.find('.audioTrack-progress-bar');
         this.$duration = $el.find('.audioTrack-progress-duration');
         this.$currentTime = $el.find('.audioTrack-progress-current');
+        this.img = document.createElement('img');
+        this.img.setAttribute('src', this.trackImgUrl);
+        this.img.classList.add('slideShow-img', 'slideShow-img_added', 'slideShow-img_fadeOut');
         this.updateTrackPos();
+    }
+
+    queueUp() {
+        if (this._queued) { return; }
+        this.audio.setAttribute('src', this.url);
+        this._queued = true;
     }
 
     toggle() {
@@ -28,6 +41,9 @@ class Track {
     }
 
     play() {
+        if (!this.queued) {
+            this.queueUp();
+        }
         this.audio.play();
         this.$el.addClass('playing');
         this.$el.removeClass('paused');
@@ -37,6 +53,9 @@ class Track {
     }
 
     pause() {
+        if (!this.queued) {
+            this.queueUp();
+        }
         this.audio.pause();
         this.$el.removeClass('playing');
         this.$el.addClass('paused');
@@ -73,11 +92,67 @@ class Track {
         }
         this.$currentTime.text(`${mins}:${secs}`);
         this.$progressBar.css('width', `${pct}%`);
+        if (pct >= 90 || (dur - time) < 30) {
+            this.parent.queueTrack(this.trackSeq + 1);
+        }
+    }
+
+    handleMouseSeek(evt) {
+        evt.preventDefault();
+        evt.stopPropagation();
+        const pos = evt.offsetX;
+        const pct = pos / this.$progress.outerWidth();
+        const time = pct * this.audio.duration;
+        this.audio.currentTime = time;
+        console.log(time);
+    }
+}
+
+class SlideShow {
+    constructor($el) {
+        this.$el = $el;
+        this.setId = $el.data('setImgTargetId');
+        console.debug($el.get(0), this.setId)
+        this.ownImg = $el.find('img');
+        this.otherImgs = [];
+    }
+
+    setImg(img) {
+        let found = false;
+        for (const i of this.otherImgs) {
+            if (i === img) {
+                $(i).removeClass('slideShow-img_fadeOut');
+                found = true;
+            } else {
+                $(i).addClass('slideShow-img_fadeOut');
+            }
+        }
+        // if (img != null && !found) {
+            // this.otherImgs.push(img);
+            // this.$el.append(img);
+            // $(img).removeClass('slideShow-img_fadeOut');
+            // this.ownImg.addClass('slideShow-img_fadeOut');
+        // }
+        if (found) {
+            this.ownImg.addClass('slideShow-img_fadeOut');
+        }
+        if (img == null) {
+            this.ownImg.removeClass('slideShow-img_fadeOut');
+        }
+    }
+
+    addImg(img) {
+        this.otherImgs.push(img);
+        this.$el.append(img);
     }
 }
 
 class TrackList {
     constructor() {
+        this.slideShows = $('[data-set-img-target-id]').get()
+        .map(el => {
+            return new SlideShow($(el));
+        });
         this.tracks = $('[data-audio-file]').get()
         .map((el, idx) => {
             return new Track(
@@ -86,21 +161,45 @@ class TrackList {
         if (this.tracks.length > 0) {
             this.tracks[0].pause();
         }
+        for (const t of this.tracks) {
+            for (const s of this.slideShows) {
+                if (t.setId === s.setId) {
+                    s.addImg(t.img);
+                }
+            }
+        }
     }
 
     playTrack(trackSeq) {
         if (trackSeq < 0 || trackSeq >= this.tracks.length) {
             return;
         }
+        const thisTrack = this.tracks[trackSeq];
         for (const track of this.tracks) {
-            if (track === this.tracks[trackSeq]) {
-                this.tracks[trackSeq].play();
+            if (track === thisTrack) {
+                thisTrack.play();
             } else {
                 if (track.playing || track.paused) {
                     track.stop();
                 }
             }
         }
+        for (const show of this.slideShows) {
+            if (show.setId === thisTrack.setId) {
+                show.setImg(thisTrack.img);
+            } else {
+                show.setImg(null);
+            }
+        }
+    }
+
+
+
+    queueTrack(trackSeq) {
+        if (trackSeq < 0 || trackSeq >= this.tracks.length) {
+            return;
+        }
+        this.tracks[trackSeq].queueUp();
     }
 }
 

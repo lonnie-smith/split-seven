@@ -1,0 +1,18 @@
+.slideShow {
+    position: relative;
+}
+
+.slideShow-img {
+    width: 100%;
+    transition: opacity 500ms ease;
+}
+
+.slideShow-img_added {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.slideShow-img_fadeOut {
+    opacity: 0;
+}
