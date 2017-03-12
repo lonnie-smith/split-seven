@@ -65,8 +65,8 @@ keystone.import('./models');
 // Setup common locals for your templates. Runtime locals (that should be set
 // uniquely for each request) should be added to ./routes/middleware/
 keystone.set('locals', {
+    env: keystone.get('env'),
     // _: require('lodash'),
-    // env: keystone.get('env'),
     // utils: keystone.utils,
     // editable: keystone.content.editable,
 });
