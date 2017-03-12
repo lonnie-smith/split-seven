@@ -10,7 +10,7 @@ html
         title= title || 'Split Seven'
         link(rel="shortcut icon", href="/favicon.ico", type="image/x-icon")
         link(href="https://fonts.googleapis.com/css?family=Cabin:400,400i,700,700i" rel="stylesheet")
-        link(href="/assets/styles/site.css", rel="stylesheet")
+        link(href=`/assets/styles/site.css?v=${version}`, rel="stylesheet")
 
         if env === 'production'
             script.
@@ -36,6 +36,6 @@ html
         block content
 
         block js
-            script(src="/assets/scripts/vendor.js")
-            script(src="/assets/scripts/main.js")
+            script(src=`/assets/scripts/vendor.js?v=${version}`)
+            script(src=`/assets/scripts/main.js?v=${version}`)
 

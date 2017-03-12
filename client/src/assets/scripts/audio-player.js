@@ -104,7 +104,6 @@ class Track {
         const pct = pos / this.$progress.outerWidth();
         const time = pct * this.audio.duration;
         this.audio.currentTime = time;
-        console.log(time);
     }
 }
 

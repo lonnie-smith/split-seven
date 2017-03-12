@@ -1,5 +1,8 @@
 #!/usr/bin/env node
 
+// this is used for client cache control
+const VERSION = '1.0';
+
 // pushes variables found in ./env into process.env
 require('dotenv').config({ path: '.env' });
 
@@ -66,6 +69,7 @@ keystone.import('./models');
 // uniquely for each request) should be added to ./routes/middleware/
 keystone.set('locals', {
     env: keystone.get('env'),
+    version: VERSION,
     // _: require('lodash'),
     // utils: keystone.utils,
     // editable: keystone.content.editable,
