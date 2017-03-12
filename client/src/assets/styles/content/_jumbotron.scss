@@ -4,17 +4,25 @@
 }
 
 .jumbotron-hd {
-    font-weight: 700;
-    font-size: 17vw;
-    text-align: center;
-    text-transform: uppercase;
+    color: transparent;
     & > a {
-        color: inherit;
         text-decoration: none;
         &:visited {
             color: inherit;
         }
     }
+}
+
+.jumbotron-hd-img {
+    display: block;
+    width: calc(100vw - 2rem);
+    margin: 0 auto;
+    height: 12vw;
+    color: transparent;
+    background-image: url('/assets/media/images/logo.svg');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 @include breakpoint('phone-lg', $max-width: true) {
@@ -24,5 +32,9 @@
     }
     .jumbotron-hd {
         font-size: 30vw;
+    }
+    .jumbotron-hd-img {
+        background-image: url('/assets/media/images/logo-small.svg');
+        height: 45vw;
     }
 }
